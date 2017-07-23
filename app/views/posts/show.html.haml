@@ -1,6 +1,7 @@
 #post_content
 	%h1{ :class => "title" }= @post.title
 
-	%p{ :class => "date" } Submitted #{ time_ago_in_words(@post.created_at) } ago 
+	%p{ :class => "date" } Submitted #{ time_ago_in_words(@post.created_at) } ago | #{ link_to 'Edit', edit_post_path(@post) } | #{ link_to 'Delete', post_path(@post), method: :delete, date: { confirm: 'Are you sure'} }
+
 
 	%p{ :class => "body" }= @post.body
