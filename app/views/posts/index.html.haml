@@ -3,7 +3,10 @@
 		.title
 			%h2= link_to post.title, post
 
+		.body
+			%p= truncate( post.body, length:100 )
+
 		.date
 			%p
-				= time_ago_in_words(post.created_at)
+				= time_ago_in_words( post.created_at )
 				ago

@@ -2,6 +2,12 @@
 	%h1 Make Something
 
 	=form_for :pots, url: posts_path do |f|
+		- if @post.errors.any?
+			#erros
+				%h2 #{ pluralize( @post.errors.count, "erros" ) } stopped this post from saving
+				%ul 
+					- @post.errors.full_messages.each do |msg|
+						%li= msg
 		%p
 			=f.label :title
 			%br
