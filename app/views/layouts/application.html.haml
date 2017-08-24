@@ -17,7 +17,8 @@
         %li= link_to "Posts", root_path
         %li= link_to "About", about_path
 
-      %p{ :class => "sign_in"} User Login
+      -if !user_signed_in?
+        %p{ :class => "sign_in"}= link_to "User Login", new_user_session_path 
 
     #main_content
       #header
@@ -28,9 +29,11 @@
         - else 
           = link_to "Back to Post Feed", root_path
 
-        .buttons
-          = link_to "Make Post", new_post_path, :class => "button"
-          = link_to "Log Out", new_post_path, :class => "button"
+
+        -if user_signed_in?
+          .buttons
+            = link_to "Make Post", new_post_path, :class => "button"
+            = link_to "Log Out", destroy_user_session_path, method: :delete, :class => "button"
 
       - flash.each do |name, msg|
         = content_tag(:div, msg, class: "alert")
