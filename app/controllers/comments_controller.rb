@@ -1,14 +1,14 @@
 class CommentsController < ApplicationController
-before_action :find_comment, :only [:create, :delete]
+before_action :find_comment, only: [:create, :destroy]
 
 	def create		
 		@comment = @post.comments.create(comment_params)
 
-		redirect_to post_path(@post)
+		redirect_to post_path(@post)		
 	end
 
 	def destroy
-		@comment = @pots.comments.find([:pots_id])
+		@comment = @post.comments.find(params[:id])
 		@comment.destroy
 
 		redirect_to post_path(@post)
@@ -21,6 +21,6 @@ before_action :find_comment, :only [:create, :delete]
 		end 
 
 		def comment_params
-			params[:comment].permit(:name, :body)
+			params.require(:comment).permit(:name, :body)
 		end
 end

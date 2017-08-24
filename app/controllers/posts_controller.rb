@@ -5,6 +5,9 @@ class PostsController < ApplicationController
 		@posts = Post.all.order('created_at DESC')
 	end
 
+	def show
+	end
+
 	def new
 		@post = Post.new
 	end
@@ -42,7 +45,7 @@ class PostsController < ApplicationController
 			end
 
 			def post_params
-				params.require(:pots).permit( :title, :body )
+			  params.require(:post).permit(:title, :body)
 			end
 
 
